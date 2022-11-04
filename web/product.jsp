@@ -133,4 +133,11 @@
         e.stopPropagation();
     }
 </script>
+<style>
+    #product-link li{
+        background-color: sienna;
+        color: white;
+        
+    }
+</style>
 <%@include file="./template/footer.jsp" %>

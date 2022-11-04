@@ -30,10 +30,10 @@
             <div id="content">
                 <div id="content-left">
                     <ul>
-                        <a href="${applicationScope.path}/dashboard"><li>Dashboard</li></a>
-                        <a href="${applicationScope.path}/order/manage"><li>Orders</li></a>
-                        <a href="${applicationScope.path}/product/manage"><li>Products</li></a>
-                        <a href="#"><li>Customers</li></a>
+                        <a id="dashboard-link" href="${applicationScope.path}/dashboard"><li>Dashboard</li></a>
+                        <a id="order-link" href="${applicationScope.path}/order/manage"><li>Orders</li></a>
+                        <a id="product-link" href="${applicationScope.path}/product/manage"><li>Products</li></a>
+                        <a id="customer-link" href="#"><li>Customers</li></a>
                     </ul>
                 </div>
                 <c:if test="${sessionScope.AccSession eq null or sessionScope.AccSession.getRole() ne 1}">

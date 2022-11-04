@@ -80,4 +80,10 @@
     </div>
 </div>
 </div>
+<style>
+    #order-link li{
+        background-color: sienna;
+        color: white;
+    }
+</style>
 <%@include file="./template/admin-footer.jsp" %>

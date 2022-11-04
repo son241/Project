@@ -26,7 +26,22 @@
             <div id="dashboard-2">
                 <div id="chart" style="text-align: center;">
                     <div id="chart1">
-                        <h3>Statistic Orders (Month)</h3>
+                        <div id="chart-title">
+                            <form action="dashboard">
+                                <select name="year" style="width: 60px;
+                                        height: 30px;">
+                                    <c:forEach begin="${minYear}" end="${maxYear}" var="y">
+                                        <option value="${y}" <c:if test="${y eq maxYear and filterYear eq null}">selected=""</c:if>>${y}</option>
+                                        <c:if test="${filterYear eq y}">
+                                            <option value="${y}" selected>${y}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                                <input type="submit" value="Filter" style="width: 60px;
+                                       height: 30px;">
+                            </form>
+                            <h3>Statistic Orders (Month)</h3>
+                        </div>
                         <canvas id="myChart1" style="width: 100%;"></canvas>
                     </div>
                     <div id="chart2">
@@ -39,6 +54,12 @@
 </div>
 </div>
 <%@include file="./template/admin-footer.jsp" %>
+<style>
+    #dashboard-link li{
+        background-color: sienna;
+        color: white;
+    }
+</style>
 <script>
     function OrdersChart() {
         var xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

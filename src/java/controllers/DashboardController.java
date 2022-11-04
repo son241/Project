@@ -20,7 +20,19 @@ public class DashboardController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        int minYear = (int) new OrderDAO().getDataNumber("select distinct MIN(Year(o.OrderDate))\n"
+                + "from Orders o");
+        int maxYear = (int) new OrderDAO().getDataNumber("select YEAR(GETDATE())");
+
         if (req.getSession().getAttribute("AccSession") != null && ((Account) req.getSession().getAttribute("AccSession")).getRole() == 1) {
+            int filterYear;
+            try {
+                filterYear = Integer.parseInt(req.getParameter("year"));
+            } catch (Exception e) {
+                filterYear = maxYear;
+            }
+
             int totalGuest = (int) new OrderDAO().getDataNumber("select Count(*) from Customers\n"
                     + "where CustomerID not in (select CustomerID from Accounts where CustomerID is not null)");
 
@@ -51,13 +63,14 @@ public class DashboardController extends HttpServlet {
                     monthSale[i] = new OrderDAO().getDataNumber("select ROUND(sum(a.TotalAmount), 2)\n"
                             + "from (select o.OrderID, sum(od.UnitPrice * od.Quantity - od.UnitPrice * od.Quantity * od.Discount) as TotalAmount, o.OrderDate\n"
                             + "from Orders o, [Order Details] od\n"
-                            + "where o.OrderID = od.OrderID and MONTH(OrderDate) = " + (i + 1) + " and Year(OrderDate) = Year(GETDATE())\n"
+                            + "where o.OrderID = od.OrderID and MONTH(OrderDate) = " + (i + 1) + " and Year(OrderDate) = " + filterYear + "\n"
                             + "group by o.OrderID, o.OrderDate) as a");
                 } catch (Exception e) {
                     monthSale[i] = 0;
                 }
             }
-
+            
+            req.setAttribute("filterYear", filterYear);
             req.setAttribute("totalCustomer", totalCustomer);
             req.setAttribute("totalGuest", totalCusGuest);
             req.setAttribute("newCustomer", newCustomer);
@@ -65,8 +78,10 @@ public class DashboardController extends HttpServlet {
             req.setAttribute("totalOrder", totalOrder);
             req.setAttribute("weeklySale", weeklySale);
             req.setAttribute("monthSale", monthSale);
+            req.setAttribute("minYear", minYear);
+            req.setAttribute("maxYear", maxYear);
             req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
-        }else{
+        } else {
             resp.sendError(401);
         }
     }

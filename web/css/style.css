@@ -1,4 +1,9 @@
-*{margin: 0px; padding: 0px;font-size: 16px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+*{
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 #container{
     width: 80%;
     margin: 0px auto;
@@ -76,6 +81,7 @@
     background-color: sienna;
     cursor: pointer;
     color:white;
+    
 }
 
 #content-left ul a{
@@ -154,7 +160,7 @@
 #dashboard-2{
     background: #fff;
     margin-top: 20px;
-    
+
 }
 
 #chart{
@@ -170,6 +176,16 @@
 #chart2{
     width: 30%;
     right: 0px;
+}
+
+#chart-title{
+    display: flex;
+    margin:16px 0;
+    text-align: center;
+}
+
+#chart-title h3{
+    margin: 0 auto;
 }
 
 .product{
@@ -322,7 +338,7 @@
 }
 
 #product-detail-right{
-    width: 60%; 
+    width: 60%;
 }
 
 #product-detail-right-content{
@@ -611,16 +627,20 @@
     border-collapse: collapse;
     width: 100%;
 }
-  
+
 #orders td, #orders th {
     border: 1px solid #ddd;
     padding: 8px;
 }
-  
-#orders tr:nth-child(even){background-color: #f2f2f2;}
-  
-#orders tr:hover {background-color: #ddd;}
-  
+
+#orders tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#orders tr:hover {
+    background-color: #ddd;
+}
+
 #orders th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -637,32 +657,32 @@
 #paging{
     text-align: center;
     margin-top: 15px;
-   
+
 }
 
 .pagination {
     display: inline-block;
     text-align: center;
-     /*display: flex;*/
-  }
-  
-  .pagination a {
+    /*display: flex;*/
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-  }
-  
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: sienna;
     color: white;
     border-radius: 5px;
-  }
-  
-  .pagination a:hover:not(.active) {
+}
+
+.pagination a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
-  }
+}
 
 #order-title input[type="submit"]{
     width: 80px;
@@ -717,22 +737,22 @@
 #product-title-3 label {
     cursor: pointer;
     text-decoration: underline;
- }
- 
- #product-title-3 #upload-file{
+}
+
+#product-title-3 #upload-file{
     opacity: 0;
     z-index: -1;
- }
+}
 
- #order-table-admin{
+#order-table-admin{
     margin-top: -30px;
- }
+}
 
- #content-main-product{
+#content-main-product{
     width: 100%;
     border: 1px solid sandybrown;
     display: flex;
- }
+}
 
 .content-main-1{
     width: 50%;

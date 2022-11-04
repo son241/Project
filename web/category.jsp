@@ -8,8 +8,8 @@
         <h3>CATEGORY</h3>
         <ul>
             <c:forEach items="${categoryList}" var="item">
-                <a class="category-item" href="product-list?category-id=${item.getCategoryID()}"><li>${item.getCategoryName()}</li></a>
-                    </c:forEach>
+                <a class="category-item" href="product-list?category-id=${item.getCategoryID()}"><li <c:if test="${item.getCategoryID() eq c.getCategoryID()}">style="background-color: sienna; color: white"</c:if>>${item.getCategoryName()}</li></a>
+            </c:forEach>
 
 
         </ul>
