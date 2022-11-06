@@ -20,12 +20,11 @@ public class DashboardController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        int minYear = (int) new OrderDAO().getDataNumber("select distinct MIN(Year(o.OrderDate))\n"
-                + "from Orders o");
-        int maxYear = (int) new OrderDAO().getDataNumber("select YEAR(GETDATE())");
-
         if (req.getSession().getAttribute("AccSession") != null && ((Account) req.getSession().getAttribute("AccSession")).getRole() == 1) {
+            int minYear = (int) new OrderDAO().getDataNumber("select distinct MIN(Year(o.OrderDate))\n"
+                    + "from Orders o");
+            int maxYear = (int) new OrderDAO().getDataNumber("select YEAR(GETDATE())");
+
             int filterYear;
             try {
                 filterYear = Integer.parseInt(req.getParameter("year"));
@@ -69,7 +68,7 @@ public class DashboardController extends HttpServlet {
                     monthSale[i] = 0;
                 }
             }
-            
+
             req.setAttribute("filterYear", filterYear);
             req.setAttribute("totalCustomer", totalCustomer);
             req.setAttribute("totalGuest", totalCusGuest);
