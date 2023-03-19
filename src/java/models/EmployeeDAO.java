@@ -23,7 +23,7 @@ public class EmployeeDAO extends DBContext {
                     + "where EmployeeID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int EmployeeID = rs.getInt("EmployeeID");

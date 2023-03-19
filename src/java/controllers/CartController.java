@@ -19,7 +19,7 @@ import models.ProductDAO;
  * @author Admin
  */
 public class CartController extends HttpServlet {
-   
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<CartItem> cart = (ArrayList<CartItem>) req.getSession().getAttribute("CartSession");
@@ -39,20 +39,27 @@ public class CartController extends HttpServlet {
         } else {
             if (!isExisted(cart, p)) {
                 cart.add(new CartItem(p, 1));
-                req.setAttribute("add-cart-status", true);
             } else {
-                req.setAttribute("add-cart-status", false);
+                for (CartItem item : cart) {
+                    if (item.getP().getProductID() == p.getProductID()) {
+                        int oldQuantity = item.getQuantity();
+                        item.setQuantity(oldQuantity + 1);
+                        break;
+                    }
+                }
             }
+            req.getSession().setAttribute("CartSession", cart);
+            req.setAttribute("add-cart-status", true);
         }
-             
+
         req.setAttribute("p", p);
         if (!buy) {
             req.getRequestDispatcher("../detail.jsp").forward(req, resp);
-        }else{
+        } else {
             req.getRequestDispatcher("../cart.jsp").forward(req, resp);
         }
     }
-        
+
     boolean isExisted(ArrayList<CartItem> cart, Product p) {
         for (CartItem item : cart) {
             if (item.getP().getProductID() == p.getProductID()) {
@@ -61,4 +68,5 @@ public class CartController extends HttpServlet {
         }
         return false;
     }
+
 }

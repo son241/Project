@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import DAL.*;
+import java.io.File;
 import java.util.ArrayList;
 import models.*;
 
@@ -87,6 +88,7 @@ public class CRUDController extends HttpServlet {
 
     private void implementCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req = validateProductData(req);
+        
         if ((boolean) req.getAttribute("status")) {
             Product p = (Product) req.getAttribute("product");
             int result = new ProductDAO().addProduct(p);

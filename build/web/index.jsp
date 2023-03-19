@@ -86,9 +86,8 @@
                 <%
                         request.removeAttribute("productlist");
                         productlist = new ProductDAO().getProductListBySqlQuery("select top 4 p.ProductID, p.CategoryID, p.ProductName, p.QuantityPerUnit, p.ReorderLevel, p.UnitPrice, p.UnitsInStock, p.UnitsOnOrder, p.Discontinued\n"
-                        + "from Products p, [Order Details] od\n"
-                        + "where p.ProductID = od.ProductID\n"
-                        + "order by od.Discount desc");
+                        + "from [Order Details] od, Products p\n"
+                        + "where od.ProductID = p.ProductID and od.Discount = (select min(Discount) from [Order Details])");
                         request.setAttribute("productlist", productlist);               
                 %>
                 <div class="path">Hot</b></div>      
@@ -134,13 +133,7 @@
                 <div class="content-main">
                     <%
                         request.removeAttribute("productlist");
-                        productlist = new ProductDAO().getProductListBySqlQuery("select top 4 p.ProductID, p.CategoryID, p.ProductName, p.QuantityPerUnit, p.ReorderLevel, p.UnitPrice, p.UnitsInStock, p.UnitsOnOrder, p.Discontinued\n"
-                        + "from Products p,\n"
-                        + "(select top 4 od.ProductID, count(*) as NumberOfProduct\n"
-                        + "from [Order Details] od\n"
-                        + "group by od.ProductID\n"
-                        + "order by NumberOfProduct desc) as od\n"
-                        + "where p.ProductID = od.ProductID");
+                        productlist = new ProductDAO().getProductListBySqlQuery("select top 4 * from Products order by ProductID desc");
                         request.setAttribute("productlist", productlist);               
                     %>
                     <c:forEach items="${productlist}" var="p">

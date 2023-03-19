@@ -130,7 +130,6 @@ public class CartAction extends HttpServlet {
     private void submitOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req = validateInputData(req, resp);
         cart = (ArrayList<CartItem>) req.getSession().getAttribute("CartSession");
-        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 
         String CompanyName = ((String) req.getAttribute("CompanyName"));
         String ContactName = ((String) req.getAttribute("ContactName"));
@@ -203,24 +202,6 @@ public class CartAction extends HttpServlet {
         } else {
             return false;
         }
-    }
-
-    private double getTotalAmountOrder(ArrayList<OrderDetail> odList) {
-        double total = 0;
-        for (OrderDetail item : odList) {
-            total += (item.getQuantity() * item.getUnitPrice()) - (item.getQuantity() * item.getUnitPrice() * item.getDiscount());
-        }
-        return total;
-    }
-
-    String getString(String value) {
-        String s = "";
-        try {
-            s = value;
-        } catch (Exception e) {
-            s = "";
-        }
-        return s;
     }
 
     private HttpServletRequest validateInputData(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

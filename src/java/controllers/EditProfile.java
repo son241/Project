@@ -24,6 +24,7 @@ public class EditProfile extends HttpServlet {
         Customer c = new CustomerDAO().getCustomer(((Account) req.getSession().getAttribute("AccSession")).getCustomerID());
         req.setAttribute("customer", c);
         req.getRequestDispatcher("../editProfile.jsp").forward(req, resp);
+        
     }
 
     @Override

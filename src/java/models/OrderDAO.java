@@ -111,7 +111,7 @@ public class OrderDAO extends DBContext {
                 int OrderID = rs.getInt("OrderID");
                 String CustomerID = rs.getString("CustomerID");
                 int EmployeeID = rs.getInt("EmployeeID");
-                Date OrderDate = Date.valueOf(rs.getString("OrderDate").split(" ")[0]);
+                Date OrderDate = rs.getDate("OrderDate");
                 Date RequiredDate = rs.getDate("RequiredDate");
                 Date ShippedDate = rs.getDate("ShippedDate");
                 double Freight = rs.getDouble("Freight");
